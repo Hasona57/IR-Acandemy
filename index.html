@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="images/robot.png">
+  <link rel="stylesheet" href="style.css">
+  <title>IOT & Robotics Academy</title>
+</head>
+<body>
+<nav>
+  <div>IOT & Robotics Academy</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="projects.html">More Projects</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div>
+    <h1 id="mainHeading">Join the Future of Robotics</h1>
+    <p>Empowering youth through world-class robotics training and innovation.</p>
+    <div class="btn-group">
+      <button id="changeHeadingBtn">Change Heading</button>
+      <button id="changeBgBtn">Change Background</button>
+      <button id="toggleFactBtn">Show Fun Fact</button>
+      <button id="toggleTestimonialsBtn">Toggle Testimonials</button>
+      <button id="toggleGlowBtn">Toggle Glow</button>
+    </div>
+    <input type="text" id="liveInput" placeholder="Type to change heading live">
+    <p id="funFact" class="hidden">Fun Fact: The first industrial robot started working in 1961 at GM!</p>
+  </div>
+</section>
+
+<section id="about">
+  <h2>About Us</h2>
+  <p>We are a cutting-edge robotics education hub focused on creativity, tech, and hands-on problem solving. Our mission: prepare the next generation of inventors.</p>
+</section>
+
+<section id="courses">
+  <h2>Our Robotics Courses</h2>
+  <div class="card-container">
+    <div class="card">
+      <h3>Beginner Robotics</h3>
+      <p>Learn basic Robotics concepts and build your first circuit.</p>
+      <p>20/6/2025 — 20/7/2025</p>
+      <p><strong>EGP 300</strong></p>
+      <a href="#">Enroll Me</a>
+    </div>
+    <div class="card">
+      <h3>IOT Robotics</h3>
+      <p>Build smarter robots with WIFI, apps and websites.</p>
+      <p>1/8/2025 — 1/9/2025</p>
+      <p><strong>EGP 350</strong></p>
+      <a href="#">Enroll Me</a>
+    </div>
+    <div class="card">
+      <h3>Full Stack</h3>
+      <p>Start from basics to advanced IOT and microcontroller control.</p>
+      <p>20/6/2025 — 1/9/2025</p>
+      <p><strong>EGP 600</strong></p>
+      <a href="#">Enroll Me</a>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <h2>Meet the Mentors</h2>
+  <div class="card-container">
+    <div class="card">
+      <img src="images/Hassan.png" alt="Hassan Mohamed">
+      <h3>Hassan Mohamed</h3>
+      <p>FabLab RedSea STEM School Robotics Head</p>
+    </div>
+    <div class="card">
+      <img src="images/3bdo.jpg" alt="Abdelrahman Bassem">
+      <h3>Abdelrahman Bassem</h3>
+      <p>RedSea STEM Hack Club Head</p>
+    </div>
+    <div class="card">
+      <img src="images/amr.jpg" alt="Amr Elkhooly">
+      <h3>Amr Elkhooly</h3>
+      <p>FabLab Qena STEM School Head</p>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <h2>What Students Say</h2>
+  <blockquote>"This club changed my life! I built my first drone at 13."<footer>— Nour M., Student</footer></blockquote>
+  <blockquote>"The mentors are incredibly supportive. Highly recommended."<footer>— Omar R., Parent</footer></blockquote>
+</section>
+
+<section id="projects">
+  <h2>Student Projects</h2>
+  <div class="card-container">
+    <div class="card">Line Following Robot</div>
+    <div class="card">Obstacle Avoider Bot</div>
+    <div class="card">Voice Controlled Robot</div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p>Email: <a href="mailto:iraacademy18@gmail.com">iraacademy18@gmail.com</a></p>
+  <p>Phone: +201146599953 - +201095184555</p>
+</section>
+
+<script>
+document.getElementById("changeHeadingBtn").addEventListener("click", () => {
+  document.getElementById("mainHeading").textContent = "Let's Build the Future Together!";
+});
+
+document.getElementById("changeBgBtn").addEventListener("click", () => {
+  const hero = document.querySelector(".hero");
+  const colors = [
+    "linear-gradient(to bottom right, #083344, #312e81)",
+    "linear-gradient(to bottom right, #6b21a8, #be185d)",
+    "linear-gradient(to bottom right, #15803d, #65a30d)",
+    "linear-gradient(to bottom right, #111827, #000)"
+  ];
+  const random = colors[Math.floor(Math.random() * colors.length)];
+  hero.style.background = random;
+});
+
+document.getElementById("toggleFactBtn").addEventListener("click", () => {
+  const fact = document.getElementById("funFact");
+  fact.classList.toggle("hidden");
+});
+
+document.getElementById("liveInput").addEventListener("input", (e) => {
+  const text = e.target.value.trim();
+  if (text !== "") {
+    document.getElementById("mainHeading").textContent = text;
+  }
+});
+
+document.getElementById("toggleTestimonialsBtn").addEventListener("click", () => {
+  const section = document.getElementById("testimonials");
+  section.style.display = section.style.display === "none" ? "block" : "none";
+});
+
+document.getElementById("toggleGlowBtn").addEventListener("click", () => {
+  const heading = document.getElementById("mainHeading");
+  heading.classList.toggle("glow");
+});
+</script>
+</body>
+</html>

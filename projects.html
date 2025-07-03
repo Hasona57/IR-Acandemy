@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="images/robot.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Projects - IOT & Robotics Academy</title>
+</head>
+<body>
+<nav>
+  <div>IOT & Robotics Academy</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#highlight">Highlights</a></li>
+    <li><a href="#submit">Submit Project</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div>
+    <h1 id="projectsHeading">Our Awesome Projects</h1>
+    <p>Explore what our talented students have built and share your own innovations!</p>
+    <div class="btn-group">
+      <button id="changeGalleryHeadingBtn">Change Heading</button>
+      <button id="randomBgBtn">Random Background</button>
+      <button id="toggleGalleryBtn">Toggle Gallery</button>
+    </div>
+    <input type="text" id="headingInput" placeholder="Type new heading...">
+  </div>
+</section>
+
+<section id="gallery">
+  <h2>Project Gallery</h2>
+  <div class="card-container" id="galleryContainer">
+    <div class="card">
+      <h3>Maze Solving Robot</h3>
+      <p>This robot navigates complex mazes autonomously using IR sensors and algorithms.</p>
+    </div>
+    <div class="card">
+      <h3>Remote Controlled Arm</h3>
+      <p>A robotic arm controlled wirelessly, ideal for precise object manipulation tasks.</p>
+    </div>
+    <div class="card">
+      <h3>AI Face Tracking Robot</h3>
+      <p>Follows human faces using computer vision, great for interactive demos and surveillance.</p>
+    </div>
+    <div class="card">
+      <h3>Smart Irrigation System</h3>
+      <p>Automates plant watering using soil moisture sensors, saving water and improving growth.</p>
+    </div>
+    <div class="card">
+      <h3>Autonomous Drone</h3>
+      <p>Flies predefined paths, avoids obstacles, and can be used for aerial monitoring.</p>
+    </div>
+  </div>
+</section>
+
+<section id="highlight">
+  <h2>Featured Highlights</h2>
+  <div class="card-container">
+    <div class="card">Top Project: AI Car</div>
+    <div class="card">Innovation Award: Bio Robot</div>
+  </div>
+</section>
+
+<section id="submit">
+  <h2>Submit Your Project</h2>
+  <p>Share your creative build with our community!</p>
+  <form id="projectForm">
+    <input type="text" id="projectName" placeholder="Project Name" required>
+    <input type="text" id="studentName" placeholder="Your Name" required>
+    <textarea id="projectDescription" placeholder="Project Description" rows="4" required></textarea>
+    <button type="submit" class="main-btn">Submit</button>
+  </form>
+  <p id="formMessage"></p>
+</section>
+
+<script>
+document.getElementById("changeGalleryHeadingBtn").addEventListener("click", () => {
+  document.getElementById("projectsHeading").textContent = "Student Innovation Hub!";
+});
+
+document.getElementById("randomBgBtn").addEventListener("click", () => {
+  const hero = document.querySelector(".hero");
+  const colors = [
+    "linear-gradient(to bottom right, #083344, #312e81)",
+    "linear-gradient(to bottom right, #be185d, #3b0764)",
+    "linear-gradient(to bottom right, #15803d, #65a30d)",
+    "linear-gradient(to bottom right, #000, #1e293b)"
+  ];
+  const random = colors[Math.floor(Math.random() * colors.length)];
+  hero.style.background = random;
+});
+
+document.getElementById("toggleGalleryBtn").addEventListener("click", () => {
+  const gallery = document.getElementById("gallery");
+  gallery.style.display = gallery.style.display === "none" ? "block" : "none";
+});
+
+document.getElementById("headingInput").addEventListener("input", (e) => {
+  const text = e.target.value.trim();
+  if (text !== "") {
+    document.getElementById("projectsHeading").textContent = text;
+  }
+});
+
+const projectForm = document.getElementById("projectForm");
+const galleryContainer = document.getElementById("galleryContainer");
+const formMessage = document.getElementById("formMessage");
+
+window.addEventListener("DOMContentLoaded", () => {
+  const savedProjects = JSON.parse(localStorage.getItem("projects")) || [];
+  savedProjects.forEach(project => {
+    addProjectToGallery(project.name, project.student, project.description);
+  });
+});
+
+projectForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const name = document.getElementById("projectName").value.trim();
+  const student = document.getElementById("studentName").value.trim();
+  const description = document.getElementById("projectDescription").value.trim();
+
+  if (name && student && description) {
+    addProjectToGallery(name, student, description);
+    const savedProjects = JSON.parse(localStorage.getItem("projects")) || [];
+    savedProjects.push({ name, student, description });
+    localStorage.setItem("projects", JSON.stringify(savedProjects));
+    formMessage.textContent = `Thank you, ${student}! Your project "${name}" has been added to the gallery.`;
+    formMessage.style.color = "lightgreen";
+    projectForm.reset();
+  } else {
+    formMessage.textContent = "Please fill in all fields!";
+    formMessage.style.color = "orange";
+  }
+});
+
+function addProjectToGallery(name, student, description) {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  const title = document.createElement("h3");
+  title.textContent = `${name} by ${student}`;
+  const desc = document.createElement("p");
+  desc.textContent = description;
+  newCard.appendChild(title);
+  newCard.appendChild(desc);
+  galleryContainer.appendChild(newCard);
+}
+</script>
+</body>
+</html>
